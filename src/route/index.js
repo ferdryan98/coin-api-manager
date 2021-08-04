@@ -1,6 +1,7 @@
 const botRoutes = require('./bot');
 const dealRoutes = require('./deal');
 const accountRoutes = require('./account');
+const coinRoutes = require('./coin');
 
 const notFound = {
   method: '*',
@@ -16,6 +17,7 @@ const routes = [
   ...botRoutes,
   ...dealRoutes,
   ...accountRoutes,
+  ...coinRoutes,
 ];
 
 module.exports = routes;

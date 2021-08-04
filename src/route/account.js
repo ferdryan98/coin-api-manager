@@ -10,6 +10,11 @@ const botRoutes = [
   },
   {
     method: 'GET',
+    path: `${prefix}/{accountId}`,
+    handler: handler.getAccountById,
+  },
+  {
+    method: 'GET',
     path: `${prefix}/fetch`,
     handler: handler.fetchAllRealAccount,
   },

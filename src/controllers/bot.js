@@ -57,6 +57,7 @@ const openTrades = async (request, h) => {
     where: {
       pair,
       strategy,
+      mode: `${process.env.ACCOUNT_MODE}`,
     },
   });
 
@@ -81,6 +82,7 @@ const closeTrades = async (request, h) => {
     where: {
       pair,
       strategy,
+      mode: `${process.env.ACCOUNT_MODE}`,
     },
   });
   const response = await Promise.all(data.map(async (key) => {

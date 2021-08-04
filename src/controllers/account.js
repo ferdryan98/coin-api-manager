@@ -33,6 +33,23 @@ const getAllAccount = async (request, h) => {
     .code(200);
 };
 
-const accountController = { fetchAllRealAccount, getAllAccount };
+const getAccountById = async (request, h) => {
+  const { accountId } = request.params;
+  console.log(accountId);
+  const account = await models.Accounts.findAll({
+    where: {
+      accountId,
+    },
+    include: ['bots'],
+  });
+  return h
+    .response({
+      status: 'OK',
+      data: account,
+    })
+    .code(200);
+};
+
+const accountController = { fetchAllRealAccount, getAllAccount, getAccountById };
 
 module.exports = accountController;

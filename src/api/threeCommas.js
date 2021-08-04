@@ -3,7 +3,7 @@
 /* eslint-disable no-return-await */
 /* eslint-disable no-underscore-dangle */
 
-const querystring = require('querystring');
+const { stringify } = require('querystring');
 const crypto = require('crypto');
 const fetch = require('node-fetch');
 
@@ -30,11 +30,11 @@ class threeCommasAPI {
       return new Error('missing api key or secret');
     }
 
-    const sig = this.generateSignature(path, querystring.stringify(params));
-
+    const sig = this.generateSignature(path, stringify(params));
     try {
+      const url = `${this._url}${path}${stringify(params)}`;
       const response = await fetch(
-        `${this._url}${path}${querystring.stringify(params)}`,
+        url,
         {
           method,
           timeout: 30000,
@@ -46,7 +46,6 @@ class threeCommasAPI {
           },
         },
       );
-
       return await response.json();
     } catch (e) {
       console.log(e);
@@ -198,7 +197,7 @@ class threeCommasAPI {
     );
   }
 
-  async botPaniceSellAllDeals(bot_id) {
+  async botPanicSellAllDeals(bot_id) {
     return await this.makeRequest(
       'POST',
       `/public/api/ver1/bots/${bot_id}/panic_sell_all_deals?`,

@@ -8,6 +8,11 @@ const botRoutes = [
     path: `${prefix}/add_coins`,
     handler: handler.addCoins,
   },
+  {
+    method: 'GET',
+    path: `${prefix}`,
+    handler: handler.getAllCoins,
+  },
 ];
 
 module.exports = botRoutes;

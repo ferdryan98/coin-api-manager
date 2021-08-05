@@ -16,7 +16,7 @@
   "production": {
     "username": "root",
     "password": null,
-    "database": "coin_api_manager_production",
+    "database": "coin_api_manager",
     "host": "127.0.0.1",
     "dialect": "mysql"
   }

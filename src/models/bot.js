@@ -28,6 +28,7 @@ module.exports = (sequelize, DataTypes) => {
       strategy: DataTypes.STRING,
       isEnabled: DataTypes.BOOLEAN,
       mode: DataTypes.STRING,
+      message: DataTypes.STRING,
     },
     {
       sequelize,

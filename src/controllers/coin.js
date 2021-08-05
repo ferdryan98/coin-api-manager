@@ -24,6 +24,23 @@ const addCoins = async (request, h) => {
     .code(400);
 };
 
-const coinController = { addCoins };
+const getAllCoins = async (request, h) => {
+  const data = await models.Coin.findAll({});
+  const response = [];
+  // eslint-disable-next-line array-callback-return
+  data.map((key) => {
+    const message = {
+      action: 'open',
+      strategy: 'long',
+      pair: `${key.coinBase}`,
+    };
+    response.push(message);
+  });
+  return h.response({
+    status: 'OK',
+    response,
+  });
+};
+const coinController = { addCoins, getAllCoins };
 
 module.exports = coinController;

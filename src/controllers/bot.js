@@ -7,11 +7,15 @@ const models = require('../models');
 const addOrUpdate = async (accounts = []) => {
   // eslint-disable-next-line array-callback-return
   accounts.map((key) => {
+    const message = {
+      strategy: `${key.strategy}`,
+      pair: `${key.pairs[0]}`,
+    };
     models.sequelize.query(
       `INSERT INTO bots 
-      (botId,accountId,name,isEnabled, pair, strategy, mode,createdAt, updatedAt) 
-      VALUES ('${key.id}','${key.account_id}','${key.name}',${key.is_enabled},'${key.pairs[0]}','${key.strategy}','${process.env.ACCOUNT_MODE}','${key.created_at}','${key.updated_at}') on duplicate key update 
-      accountId = '${key.account_id}',name ='${key.name}', isEnabled=${key.is_enabled},pair ='${key.pairs[0]}',strategy='${key.strategy}',mode='${process.env.ACCOUNT_MODE}',createdAt ='${key.created_at}',updatedAt = '${key.updated_at}'`,
+      (botId,accountId,name,isEnabled, pair, strategy, mode,message,createdAt, updatedAt) 
+      VALUES ('${key.id}','${key.account_id}','${key.name}',${key.is_enabled},'${key.pairs[0]}','${key.strategy}','${process.env.ACCOUNT_MODE}','${JSON.stringify(message)}','${key.created_at}','${key.updated_at}') on duplicate key update 
+      accountId = '${key.account_id}',name ='${key.name}', isEnabled=${key.is_enabled},pair ='${key.pairs[0]}',strategy='${key.strategy}',mode='${process.env.ACCOUNT_MODE}',message='${JSON.stringify(message)}',createdAt ='${key.created_at}',updatedAt = '${key.updated_at}'`,
     );
   });
 };

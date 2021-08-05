@@ -30,6 +30,10 @@ module.exports = {
       mode: {
         type: Sequelize.STRING,
       },
+      message: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

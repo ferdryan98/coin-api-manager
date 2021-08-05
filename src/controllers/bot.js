@@ -46,13 +46,17 @@ const fetchAllRealBots = async (request, h) => {
 };
 
 const getAllBots = async (_request, h) => {
-  const bots = await models.Bots.findAll({ include: ['account'] });
-  return h
-    .response({
-      status: 'OK',
-      data: bots,
-    })
-    .code(200);
+  try {
+    const bots = await models.Bots.findAll({ include: ['account'] });
+    return h
+      .response({
+        status: 'OK',
+        data: bots,
+      })
+      .code(200);
+  } catch (error) {
+    console.log(error.message);
+  }
 };
 
 const openTrades = async (request, h) => {

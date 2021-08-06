@@ -1,5 +1,5 @@
 const api = require('../api');
-const models = require('../models');
+const models = require('../../models');
 require('dotenv').config();
 
 const addOrUpdate = async (accounts = []) => {

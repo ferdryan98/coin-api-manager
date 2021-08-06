@@ -21,6 +21,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start-prod": "NODE_ENV=production nodemon ./src/server.js",
     "start-dev": "nodemon ./src/server.js",
+    "db-create-prod": "NODE_ENV=production npx sequelize db:create",
+    "db-create-dev": "npx sequelize db:create",
+    "db-migrate-prod": "NODE_ENV=production npx sequelize db:migrate",
+    "db-migrate-dev": "npx sequelize db:migrate",
     "lint": "eslint src/"
   },
   "repository": {

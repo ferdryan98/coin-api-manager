@@ -2,7 +2,7 @@
 require('dotenv').config();
 
 const api = require('../api');
-const models = require('../models');
+const models = require('../../models');
 
 const addOrUpdate = async (accounts = []) => {
   // eslint-disable-next-line array-callback-return
@@ -45,14 +45,19 @@ const fetchAllRealBots = async (request, h) => {
     .code(200);
 };
 
+// eslint-disable-next-line consistent-return
 const getAllBots = async (_request, h) => {
-  const bots = await models.Bots.findAll({ include: ['account'] });
-  return h
-    .response({
-      status: 'OK',
-      data: bots,
-    })
-    .code(200);
+  try {
+    const bots = await models.Bots.findAll({ include: ['account'] });
+    return h
+      .response({
+        status: 'OK',
+        data: bots,
+      })
+      .code(200);
+  } catch (error) {
+    console.log(error.message);
+  }
 };
 
 const openTrades = async (request, h) => {

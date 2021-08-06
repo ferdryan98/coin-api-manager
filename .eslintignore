@@ -1,5 +1,5 @@
 node_modules/
-src/migrations/
-src/models/
-src/seeders/
-src/config/
+migrations/
+models/
+seeders/
+config/

@@ -25,7 +25,7 @@ const addCoins = async (request, h) => {
 };
 
 const getAllCoins = async (request, h) => {
-  const data = await models.Coin.findAll({});
+  const data = await models.Coins.findAll({});
   const response = [];
   // eslint-disable-next-line array-callback-return
   data.map((key) => {

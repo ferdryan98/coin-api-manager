@@ -1,8 +1,9 @@
 'use strict';
 const { Model } = require('sequelize');
+require('dotenv').config();
 
 module.exports = (sequelize, DataTypes) => {
-  class Bot extends Model {
+  class Account extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -10,30 +11,31 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.belongsTo(models.Accounts, {
-        as: 'account',
+      this.hasMany(models.Bots, { 
+        as: 'bots',
         foreignKey: 'accountId',
       });
     }
   }
-  Bot.init(
+  Account.init(
     {
-      botId: {
+      accountId: {
         type: DataTypes.INTEGER,
         primaryKey: true,
       },
-      accountId: DataTypes.INTEGER,
       name: DataTypes.STRING,
-      pair: DataTypes.STRING,
-      strategy: DataTypes.STRING,
-      isEnabled: DataTypes.BOOLEAN,
-      mode: DataTypes.STRING,
-      message: DataTypes.STRING,
+      mode: {
+        type: DataTypes.STRING,
+        defaultValue: process.env.ACCOUNT_MODE,
+      },
+      createdAt:DataTypes.DATE,
+      updatedAt:DataTypes.DATE,
     },
     {
       sequelize,
-      modelName: 'Bots',
-    },
+      modelName: 'Accounts',
+      tableName: 'accounts',
+    }
   );
-  return Bot;
+  return Account;
 };

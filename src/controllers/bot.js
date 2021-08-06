@@ -95,7 +95,7 @@ const closeTrades = async (request, h) => {
     },
   });
   const response = await Promise.all(data.map(async (key) => {
-    await api.botPanicSellAllDeals(key.botId);
+    await api.botCancelAllDeals(key.botId);
   }));
 
   console.log(`Semua BOT dengan pair ${pair} telah close posisi ${strategy} sebanyak ${response.length}`);

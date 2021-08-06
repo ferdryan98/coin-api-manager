@@ -1,6 +1,7 @@
 /* eslint-disable no-await-in-loop */
 require('dotenv').config();
 
+const { stringify } = require('querystring');
 const api = require('../api');
 const models = require('../../models');
 
@@ -94,11 +95,23 @@ const closeTrades = async (request, h) => {
       mode: `${process.env.ACCOUNT_MODE}`,
     },
   });
-  const response = await Promise.all(data.map(async (key) => {
-    await api.botCancelAllDeals(key.botId);
+  const bots = data.map((key) => ({ scope: 'active', bot_id: key.botId }));
+  let deals = [];
+  await Promise.all(bots.map(async (key) => {
+    const deal = await api.getDeals((key));
+    deals = [...deals, ...deal];
+  }));
+  if (deals.length < 1) {
+    return h.response({
+      status: 'OK',
+      message: 'No bots are active',
+    });
+  }
+  const response = [];
+  await Promise.all(deals.map(async (deal) => {
+    response.push(await api.dealPanicSell(deal.id));
   }));
 
-  
   console.log(`Semua BOT dengan pair ${pair} telah close posisi ${strategy} sebanyak ${response.length}`);
   return h
     .response({

@@ -95,7 +95,7 @@ const closeTrades = async (request, h) => {
     },
   });
   const response = await Promise.all(data.map(async (key) => {
-    await api.botCancelAllDeals(key.botId);
+    await api.botPanicSellAllDeals(key.botId);
   }));
 
   console.log(`Semua BOT dengan pair ${pair} telah close posisi ${strategy} sebanyak ${response.length}`);
@@ -122,12 +122,13 @@ const createShortBots = async (request, h) => {
     active_safety_orders_count: 1,
     safety_order_step_percentage: 1.0,
     take_profit_type: 'base',
-    strategy_list: [JSON.stringify({ options: {}, strategy: 'manual' })],
+    strategy_list: [JSON.stringify({ options: {}, strategy: 'tv_custom_signal' })],
     stop_loss_type: 'stop_loss',
     stop_loss_percentage: 10.0,
     strategy: 'short',
     leverage_type: 'cross',
     leverage_custom_value: 10.0,
+    start_order_type: 'market',
   };
 
   const response = await Promise.all(coins.map(async (key) => {
@@ -158,12 +159,13 @@ const createLongBots = async (request, h) => {
     active_safety_orders_count: 1,
     safety_order_step_percentage: 1.0,
     take_profit_type: 'base',
-    strategy_list: [JSON.stringify({ options: {}, strategy: 'manual' })],
+    strategy_list: [JSON.stringify({ options: {}, strategy: 'tv_custom_signal' })],
     stop_loss_type: 'stop_loss',
     stop_loss_percentage: 10.0,
     strategy: 'long',
     leverage_type: 'cross',
     leverage_custom_value: 10.0,
+    start_order_type: 'market',
   };
 
   const response = await Promise.all(coins.map(async (key) => {

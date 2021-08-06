@@ -108,7 +108,7 @@ const closeTrades = async (request, h) => {
 
 const createShortBots = async (request, h) => {
   const { accountId } = request.params;
-  const coins = await models.Coin.findAll({});
+  const coins = await models.Coins.findAll({});
   const payload = {
     account_id: `${parseInt(accountId, 10)}`,
     pairs: '',
@@ -144,7 +144,7 @@ const createShortBots = async (request, h) => {
 
 const createLongBots = async (request, h) => {
   const { accountId } = request.params;
-  const coins = await models.Coin.findAll({});
+  const coins = await models.Coins.findAll({});
   const payload = {
     account_id: `${parseInt(accountId, 10)}`,
     pairs: '',

@@ -143,6 +143,8 @@ const createShortBots = async (request, h) => {
     leverage_type: 'cross',
     leverage_custom_value: 10.0,
     start_order_type: 'market',
+    trailing_enabled: true,
+    trailing_deviation: 0.2,
   };
 
   const response = await Promise.all(coins.map(async (key) => {
@@ -180,6 +182,8 @@ const createLongBots = async (request, h) => {
     leverage_type: 'cross',
     leverage_custom_value: 10.0,
     start_order_type: 'market',
+    trailing_enabled: true,
+    trailing_deviation: 0.2,
   };
 
   const response = await Promise.all(coins.map(async (key) => {

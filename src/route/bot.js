@@ -20,7 +20,7 @@ const botRoutes = [
   },
   {
     method: 'POST',
-    path: `${prefix}/create_short_bots/{accountd}`,
+    path: `${prefix}/create_short_bots/{accountId}`,
     handler: handler.createShortBots,
   },
   {

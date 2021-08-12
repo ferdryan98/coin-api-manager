@@ -17,13 +17,15 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         primaryKey: true,
       },
-      createdAt:DataTypes.DATE,
-      updatedAt:DataTypes.DATE,
+      created_at:DataTypes.DATE,
+      updated_at:DataTypes.DATE,
     },
     {
       sequelize,
       modelName: 'Coins',
       tableName: 'coins',
+      createdAt: 'created_at',
+      updatedAt: 'updated_at'
     }
   );
   return Coin;

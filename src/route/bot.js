@@ -20,13 +20,18 @@ const botRoutes = [
   },
   {
     method: 'POST',
-    path: `${prefix}/create_short_bots/{accountId}`,
+    path: `${prefix}/create_short_bots/{accountd}`,
     handler: handler.createShortBots,
   },
   {
     method: 'POST',
     path: `${prefix}/create_long_bots/{accountId}`,
     handler: handler.createLongBots,
+  },
+  {
+    method: 'POST',
+    path: `${prefix}/update_all_bots/{accountId}`,
+    handler: handler.updateAllBots,
   },
 ];
 

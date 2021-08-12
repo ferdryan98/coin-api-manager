@@ -7,9 +7,9 @@ const addCoins = async (request, h) => {
     // eslint-disable-next-line array-callback-return
     coins.map((key) => {
       models.sequelize.query(
-        `INSERT INTO coins (coinBase, createdAt, updatedAt)
+        `INSERT INTO coins (coinBase, created_at, updated_at)
         VALUES ('${key}','${currDate}','${currDate}') on duplicate key update
-        coinBase = '${key}',updatedAt = '${currDate}'
+        coinBase = '${key}',created_at = '${currDate}',updated_at = '${currDate}'
         `,
       );
     });
@@ -28,11 +28,11 @@ const getAllCoins = async (request, h) => {
   const data = await models.Coins.findAll({});
   const response = [];
   // eslint-disable-next-line array-callback-return
-  data.map((key) => {
+  await data.map((key) => {
     const message = {
       action: 'open',
       strategy: 'long',
-      pair: `${key.coinBase}`,
+      pairs: `${key.coinBase}`,
     };
     response.push(message);
   });

@@ -13,13 +13,13 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       this.hasMany(models.Bots, { 
         as: 'bots',
-        foreignKey: 'accountId',
+        foreignKey: 'account_id',
       });
     }
   }
   Account.init(
     {
-      accountId: {
+      account_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
       },
@@ -28,13 +28,17 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         defaultValue: process.env.ACCOUNT_MODE,
       },
-      createdAt:DataTypes.DATE,
-      updatedAt:DataTypes.DATE,
+      created_at:{
+        type: DataTypes.DATE,
+      },
+      updated_at:DataTypes.DATE,
     },
     {
       sequelize,
       modelName: 'Accounts',
       tableName: 'accounts',
+      createdAt: 'created_at',
+      updatedAt: 'updated_at'
     }
   );
   return Account;

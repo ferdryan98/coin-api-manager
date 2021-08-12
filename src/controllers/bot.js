@@ -234,7 +234,7 @@ const createShortBots = async (request, h) => {
   const response = await Promise.all(coins.map(async (key) => {
     payload.pairs = `${key.coinBase}`;
     payload.name = `SHORT ${key.coinBase}`;
-    console.log(await api.botCreate(payload));
+    await api.botCreate(payload);
   }));
 
   return h.response({

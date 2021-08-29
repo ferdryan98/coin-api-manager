@@ -155,7 +155,7 @@ const openTrades = async (request, h) => {
       const payload = {
         bot_id: key.bot_id,
       };
-      await api.botStartNewDeal(payload);
+      console.log(await api.botStartNewDeal(payload));
     }),
   );
 

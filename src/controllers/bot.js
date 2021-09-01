@@ -205,13 +205,13 @@ const closeTrades = async (request, h) => {
 };
 
 const createShortBots = async (request, h) => {
-  const { accountId, baseOrderVolume } = request.params;
+  const { accountId } = request.params;
   const coins = await models.Coins.findAll({});
   const payload = {
     account_id: `${parseInt(accountId, 10)}`,
     pairs: '',
     name: '',
-    base_order_volume: `${parseInt(baseOrderVolume, 10)}`,
+    base_order_volume: 100.0,
     take_profit: 1.0,
     safety_order_volume: 100.0,
     martingale_volume_coefficient: 1.05,
@@ -244,13 +244,13 @@ const createShortBots = async (request, h) => {
 };
 
 const createLongBots = async (request, h) => {
-  const { accountId, baseOrderVolume } = request.params;
+  const { accountId } = request.params;
   const coins = await models.Coins.findAll({});
   const payload = {
     account_id: `${parseInt(accountId, 10)}`,
     pairs: '',
     name: '',
-    base_order_volume: `${parseInt(baseOrderVolume, 10)}`,
+    base_order_volume: 100.0,
     take_profit: 1.0,
     safety_order_volume: 100.0,
     martingale_volume_coefficient: 1.05,

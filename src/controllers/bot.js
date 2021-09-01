@@ -205,7 +205,7 @@ const closeTrades = async (request, h) => {
 };
 
 const createShortBots = async (request, h) => {
-  const { accountId } = request.params;
+  const { accountId, baseOrderVolume } = request.params;
   const coins = await models.Coins.findAll({});
   const payload = {
     account_id: `${parseInt(accountId, 10)}`,
@@ -234,7 +234,7 @@ const createShortBots = async (request, h) => {
   const response = await Promise.all(coins.map(async (key) => {
     payload.pairs = `${key.coinBase}`;
     payload.name = `SHORT ${key.coinBase}`;
-    await api.botCreate(payload);
+    console.log(await api.botCreate(payload));
   }));
 
   return h.response({
@@ -244,7 +244,7 @@ const createShortBots = async (request, h) => {
 };
 
 const createLongBots = async (request, h) => {
-  const { accountId } = request.params;
+  const { accountId, baseOrderVolume } = request.params;
   const coins = await models.Coins.findAll({});
   const payload = {
     account_id: `${parseInt(accountId, 10)}`,
